@@ -1,28 +1,42 @@
-print("--- Advanced Financial Report ---")
-total = 0
-count = 0  # To count how many entries
+import json
+import os
 
-try:
-    with open("expenses.txt", "r") as file:
-        lines = file.readlines()
+def start_analysis():
+    os.system('clear')
+    print("========================================")
+    print("   🛡️ نظام مستشار الرقمنة المؤمن - الجزائر   ")
+    print("========================================\n")
+
+    # نظام حماية بسيط (Security Gate)
+    secret_pin = "2026"  # يمكنك تغيير هذا الرمز لاحقاً
+    user_input = input("🔒 أدخل رمز الدخول للأمان: ")
+
+    if user_input != secret_pin:
+        print("\n❌ وصول مرفوض! الرمز خاطئ.")
+        return
+
+    try:
+        with open("dz.json", "r", encoding='utf-8') as f:
+            db = json.load(f)
+
+        institutions = db.get("institutions", {})
         
-        for line in lines:
-            data = line.strip().split(": ")
-            if len(data) == 2:
-                item = data[0]
-                amount = float(data[1])
-                total += amount
-                count += 1  # Increment counter for each line
-                print(f"[{count}] Item: {item} | Amount: {amount}")
+        print("\n✅ تم التحقق.. المؤسسات المتاحة: " + ", ".join(institutions.keys()))
+        query = input("\n🔎 أدخل اسم المؤسسة للتحليل: ").strip().lower()
 
-    print("-" * 30)
-    print(f"Total Items Processed: {count}")
-    print(f"Total Budget: {total}")
-    
-    # Calculate Average
-    if count > 0:
-        average = total / count
-        print(f"Average Expense: {average:.2f}")
+        if query in institutions:
+            data = institutions[query]
+            print(f"\n📊 التقرير التقني لـ {data['name']}:")
+            print(f"----------------------------------------")
+            print(f"🏛️ الخدمة: {data['service']}")
+            print(f"🌐 الحالة: {data['status']}")
+            print(f"💡 نصيحة تقنية: {data['tech_tip']}")
+            print(f"----------------------------------------")
+        else:
+            print(f"\n❌ المؤسسة '{query}' غير مسجلة.")
 
-except FileNotFoundError:
-    print("Error: File not found.")
+    except Exception as e:
+        print(f"❌ خطأ: {e}")
+
+if __name__ == "__main__":
+    start_analysis()
