@@ -1,0 +1,4 @@
+Item,Base_Amount_DZD,Tax_Rate,Final_Amount_DZD,Account_Type
+Office_Supplies,100000,0.19,119000,Operating_Budget
+Professional_Service,500000,0.09,545000,Investment_Budget
+Staff_Bonus,200000,0,200000,Personnel_Expenses

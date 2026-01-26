@@ -1,0 +1,5 @@
+Category,Sub_Category,Allocated_Amount_DZD,Spent_Amount_DZD,Status
+Personnel,Salaries,5000000,4500000,Completed
+Equipment,IT_Hardware,1200000,0,Pending
+Maintenance,Buildings,800000,200000,Ongoing
+Transport,Fuel,300000,150000,Ongoing
